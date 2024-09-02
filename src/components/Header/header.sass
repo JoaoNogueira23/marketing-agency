@@ -1,0 +1,29 @@
+@import "../../app/styles/variables"
+@import "../../app/styles/buttons"
+    
+.header
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+
+    .btn
+        @extend %button-main
+
+
+    .nav
+        ul
+            display: flex
+            flex-direction: row
+            gap: 32px
+            padding: 16px
+            list-style-type: none
+            color: $text-primary
+
+            li
+                text-decoration: none
+    
+    
+    .logo
+        color: $text-secondary
+
