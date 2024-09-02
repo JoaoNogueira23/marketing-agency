@@ -2,13 +2,15 @@
 @import "../../app/styles/buttons"
     
 .header
+    @extend %margins
     display: flex
     flex-direction: row
     justify-content: space-between
     align-items: center
+    padding: 16px 0 16px 0
 
     .btn
-        @extend %button-main
+        @include button($bg-color-btn: $text-secondary)
 
 
     .nav

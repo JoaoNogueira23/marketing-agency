@@ -1,0 +1,37 @@
+@import "../../app/styles/variables"
+@import "../../app/styles/buttons"
+
+.container-home
+    width: 100vw
+    background-color: $text-secondary
+
+    .content-home
+        @extend %margins
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        width: 30vw
+        padding-top: 4rem
+
+        .apresentation
+            display: flex
+            padding-bottom: 4rem
+
+            .describe
+                display: flex
+                flex-direction: column
+                gap:16px
+                color: $text-info
+                
+
+                .title
+                    font-size: 52px
+                    color: $text-info
+
+                .btn
+                    @include button($bg-color-btn: $bg-btn)
+                    width: 200px
+                    
+
+
+

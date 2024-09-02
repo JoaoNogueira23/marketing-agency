@@ -1,9 +1,11 @@
 @import './variables'
     
-%button-main
-    background-color: $text-secondary
+@mixin button($bg-color-btn, $text-color: $text-info)
+    background-color: $bg-color-btn
     padding: 16px
     border: none
     border-radius: 5px
-    height: 42px
-    color: $bg-secondary
+    color: $text-info
+
+    &:hover
+        cursor: pointer
