@@ -1,4 +1,6 @@
+import Divider from '@/components/Divider/Divider'
 import './home.sass'
+import PostMain from '@/components/Posts/PostMain/PostMain'
 
 
 export default function HomePage() {
@@ -28,6 +30,10 @@ export default function HomePage() {
                     Imagem
                 </div>
             </div>
+
+            <Divider />
+
+            <PostMain />
             
         </div>
     )
