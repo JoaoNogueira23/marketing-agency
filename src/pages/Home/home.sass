@@ -2,15 +2,14 @@
 @import "../../styles/buttons"
 
 .container-home
-    width: 100vw
-    background-color: $text-secondary
+    background-color: $bg-primary
 
     .content-home
-        @extend %margins
+        @extend %paddings
+        background-color: $text-secondary
         display: flex
         flex-direction: row
         justify-content: space-between
-        width: 30vw
         padding-top: 4rem
 
         .apresentation
@@ -22,7 +21,9 @@
                 flex-direction: column
                 gap:16px
                 color: $text-info
-                
+
+                p
+                    font-weight: 500                
 
                 .title
                     font-size: 52px

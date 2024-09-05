@@ -1,0 +1,58 @@
+@import "../../../styles/variables"
+@import "../../../styles/buttons"
+
+.post-container
+    @extend %margins
+    padding: 32px 0
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    color: $text-info
+    background-color: $bg-primary
+
+.post-container-reverse
+    @extend %margins
+    padding: 32px 0
+    display: flex
+    flex-direction: row-reverse
+    justify-content: space-between
+    color: $text-info
+    background-color: $bg-primary
+
+
+.image-post
+    width: 30vw
+
+.post-title
+    color: $text-secondary 
+
+    &-larger
+        color: $text-secondary 
+        font-size: 48px
+        word-break: break-word
+    
+
+.content-post
+    width: 30vw
+    justify-self: flex-start
+    gap: 16px
+
+    .content-services
+        display: grid
+        grid-template-columns: 1fr 1fr
+        gap:16px
+
+        .describe-services
+            
+
+            .service-title
+                color: $text-secondary
+                margin: 16px 0
+
+            p
+                color: rgb(128,128,128)
+                text-align: justify
+
+            .btn
+                @include button($bg-color-btn: $bg-btn)
+                width: 150px

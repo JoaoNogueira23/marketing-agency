@@ -4,7 +4,7 @@ import "./globals.sass";
 import Header from "@/components/Header/Header";
 
 const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
+  weight: ['300', '400', '500', '700', '900'],
   subsets: ['latin']
 }
 )
