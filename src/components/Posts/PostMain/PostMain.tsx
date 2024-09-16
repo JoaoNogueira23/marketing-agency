@@ -1,13 +1,23 @@
 import { objectPostType, PropsPost } from '../types/postTypes'
 import '../styles/postmain.sass'
+import Image from 'next/image'
 
 export default function PostMain({reverse=false, data, sectionTitle, catchphrase}: PropsPost) {
 
     return(
         <div className={`post-container${reverse ? '-reverse' : ''}`}>
-            <div className="image-post">
-                Imagem
+
+            <div className="container-frame-img">
+                <Image 
+                src={'/team_work_coffe.webp'}
+                width={500}
+                height={500}
+                alt='Team Work Image'
+                className='image-post'
+                />
             </div>
+            
+
 
             <div className="content-post">
                 <h4 className='post-title medium'>{sectionTitle}</h4>

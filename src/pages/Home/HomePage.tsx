@@ -1,6 +1,9 @@
-import Divider from '@/components/Divider/Divider'
 import './home.sass'
-import PostPage from '@/components/Posts'
+import Image from 'next/image'
+import PostSection from '@/components/Posts'
+import DividerSection from '@/components/Divider/Divider'
+import BlogSection from './Sections/BlogSection/BlogSection'
+import TestimonialsSection from './Sections/Testimonials/TestimonialsSection'
 
 
 export default function HomePage() {
@@ -26,15 +29,21 @@ export default function HomePage() {
                     </div>
                 </div>
 
-                <div>
-                    Imagem
-                </div>
+                <Image 
+                src={'/women_home.webp'}
+                width={600}
+                height={500}
+                alt='Imagem de capa'
+                />
             </div>
 
-            <Divider />
+            <DividerSection />
 
+            <PostSection />
 
-            <PostPage />
+            <BlogSection />
+
+            <TestimonialsSection />
             
         </div>
     )

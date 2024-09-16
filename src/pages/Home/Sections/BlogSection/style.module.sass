@@ -1,0 +1,60 @@
+@import "../../../../styles/variables"
+
+.containerBlogSection
+    @extend %paddings
+    padding-top: 64px
+    padding-bottom: 64px
+    margin-top: 64px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-content: center
+    gap: 16px
+    background-color: $bg-secondary
+    
+
+
+    .titleBlogSection
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-content: center
+        text-align: center
+        gap:8px
+        
+        .titleV1
+            color: $purple-color
+            font-weight: 600
+            font-size: 24px
+
+        
+        .titleV2
+            color: $black-color
+            font-weight: 700
+            font-size: 32px
+    
+    .cards
+        display: flex
+        flex-direction: row
+        align-content: center
+        justify-content: center
+        text-align: start
+        gap: 32px
+
+        .cardBlog
+            display: flex
+            flex-direction: column
+            gap: 8px
+            font-size: 16px
+            cursor: pointer
+
+            .imgPost
+                border-radius: 5px
+
+            .titleV3
+                color: $green-color
+                
+        
+
+
+    

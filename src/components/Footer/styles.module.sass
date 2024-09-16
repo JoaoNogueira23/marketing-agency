@@ -1,45 +1,31 @@
 @import "../../styles/variables"
 @import "../../styles/buttons"
-    
-.header
+
+.footer
     @extend %paddings
-    z-index: 100
-    width: 100vw
-    height: 100px
-    position: fixed
-    background-color: $bg-primary
+    background-color: $bg-secondary
     display: flex
     flex-direction: row
     justify-content: space-between
     align-items: center
 
-    .btn
-        @include button($bg-color-btn: $text-secondary)
-
-
-    .nav
-        ul
+    .infosUseWebsite
+        
+        li
             display: flex
             flex-direction: row
             gap: 32px
             padding: 16px
-            list-style-type: none
-            color: $text-primary
 
-            li
-                text-decoration: none
+            ul
                 display: flex
                 flex-direction: column
-
                 a
-                    text-decoration: none
-                    color: currentcolor
+                    cursor: pointer
 
                     &:hover
                         color: $purple-color
-                    
-                    
-            
+                
                 &:hover
                     transform: translateY(-5px)
 
@@ -49,13 +35,3 @@
                     background-color: $purple-color
                     padding: 1px
                     margin-top: 5px
-
-                
-                    
-
-            
-    
-    
-    .logo
-        color: $text-secondary
-

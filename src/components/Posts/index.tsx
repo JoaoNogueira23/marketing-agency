@@ -1,7 +1,7 @@
 import PostMain from "./PostMain/PostMain";
 
 
-export default function PostPage() {
+export default function PostSection() {
     return(
         <>
             <PostMain 

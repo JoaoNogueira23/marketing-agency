@@ -1,0 +1,57 @@
+@import "../../../../styles/variables"
+
+.containerTestimonialsSection
+    @extend %margins
+    margin-top: 64px
+    padding-bottom: 150px
+    justify-content: center
+    align-content: center
+    align-items: center
+    display: flex
+    flex-direction: column
+    gap: 16px
+    color: $text-primary
+
+    .titlePrimary
+        font-size: 16px
+        font-weight: 400
+        color: $purple-color
+
+    .titleSecondary
+        font-size: 24px
+        font-weight: 700
+        color: $black-color
+
+    .titleCard
+        font-size: 16px
+
+    .cardsTestimonials
+        display: flex
+        flex-direction: row
+        gap: 32px
+
+        .cardTestimonial
+            padding: 24px
+            display: flex
+            width: 300px
+            flex-direction: column
+            text-align: start
+            gap: 16px
+            border-radius: 8px
+            box-shadow: 10px 10px 20px 20px rgba(0, 0, 0, 0.05)
+
+            .profileUser
+                display: flex
+                flex-direction: row
+                gap:16px
+
+                .contentInfoUser
+                    display: flex
+                    flex-direction: column
+                    gap: 8px
+                
+                .imgUser
+                    border-radius: 50%
+        
+
+                

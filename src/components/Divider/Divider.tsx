@@ -5,7 +5,7 @@ type ObjectSponsor = {
     title: string;
 }
 
-export default function Divider() {
+export default function DividerSection() {
 
     const sponsors: ObjectSponsor[] = [
         {
