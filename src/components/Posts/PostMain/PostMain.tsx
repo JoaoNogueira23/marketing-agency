@@ -24,7 +24,7 @@ export default function PostMain({reverse=false, data, sectionTitle, catchphrase
 
                 <h1 className='post-title-larger'>{catchphrase}</h1>
                 
-                <div className="content-services">
+                <div className={`content-services${reverse || !data[0].title? '-reverse' : ''}`}>
                     {data.map((obj: objectPostType) => (
                         <div className="describe-services" key={Math.random()}>
                             {obj.title && <h4 className='service-title'>{obj.title}</h4>}
