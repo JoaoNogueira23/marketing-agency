@@ -34,28 +34,17 @@
                 a
                     text-decoration: none
                     color: currentcolor
+                    transition: .3s
 
                     &:hover
                         color: $purple-color
-                    
-                    
-            
-                &:hover
-                    transform: translateY(-5px)
-
-                &:hover::after
-                    content: ''
-                    transform: translateY(-5px)
-                    background-color: $purple-color
-                    padding: 1px
-                    margin-top: 5px
-
-                
-                    
-
-            
-    
-    
+                        transform: translateY(-5px)
+                        
     .logo
         color: $text-secondary
+        transition: .3s
+
+        &:hover
+            cursor: pointer
+            color: $black-color
 

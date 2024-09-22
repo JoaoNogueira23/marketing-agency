@@ -10,8 +10,8 @@ export default function PostMain({reverse=false, data, sectionTitle, catchphrase
             <div className="container-frame-img">
                 <Image 
                 src={'/team_work_coffe.webp'}
-                width={500}
-                height={500}
+                width={400}
+                height={400}
                 alt='Team Work Image'
                 className='image-post'
                 />
