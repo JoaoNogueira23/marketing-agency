@@ -2,8 +2,8 @@
 
 import '../../styles/layouts/stylesForms.sass'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import axios from 'axios'
 import { useState } from 'react'
+import {useRouter} from 'next/navigation'
 
 interface AdminPageProps {
 
@@ -14,14 +14,16 @@ interface IFormInput {
     password: string
 }
 
-const defaultValue: IFormInput = {
-    usermail: '',
-    password: ''
-}
 
 export default function AdminPage(props : AdminPageProps){
-    const [loginError, setLoginError] = useState<string>('')
+    const [errorMessage, setErrorMessage] = useState<string>('')
     const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>();
+
+    const router = useRouter()
+
+    const handleRouteChange = () => {
+        router.push(`/admin/manager-page`)
+    }
 
    
     const handlerRequestLogin = (data: IFormInput) => {
@@ -47,9 +49,9 @@ export default function AdminPage(props : AdminPageProps){
         )
             .then((response) => {
                 if(response.status == 200){
-                    alert("Login realizado com sucesso")
+                    handleRouteChange()
                 }else if(response.status == 401){
-                    alert("User not registered!")
+                    setErrorMessage("User not registered!")
                 }
             })
             .catch((err) => {
@@ -80,13 +82,13 @@ export default function AdminPage(props : AdminPageProps){
                         }
                     })}
                     />
-                    {errors.usermail && <span>{errors.usermail.message}</span>}
+                    {errors.usermail && <span className='errorMessage'>{errors.usermail.message}</span>}
                 </div>
 
                 <div className={`inputForm`}> 
                     <label htmlFor='password'>Password</label>
                     <input 
-                    type="text"
+                    type="password"
                     id="password"
                     placeholder='Enter your password'
                     {...register("password", {
@@ -94,7 +96,8 @@ export default function AdminPage(props : AdminPageProps){
                     })}
                     />
                 </div>
-                {errors.password && <span>{errors.password.message}</span>}
+                {errors.password && <span className='errorMessage'>{errors.password.message}</span>}
+                {errorMessage != '' && <span className='errorMessage'>{errorMessage}</span>}
                 <button type="submit" className='btn'>Submit</button>
             </form>
         </div>
