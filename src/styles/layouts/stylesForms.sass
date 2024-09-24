@@ -1,0 +1,38 @@
+@import '../variables'
+@import '../buttons'
+
+.formsContainer
+    @extend %paddings
+    display: flex
+    flex-direction: column
+    color: $black-color
+    width: calc( 100vw - 532px )
+    height: calc( 100vh - 52px )
+    justify-content: center
+    align-content: center
+    align-items: center
+
+    .formContent
+        display: flex
+        flex-direction: column
+        gap: 1rem
+        width: 30vw
+        
+        .inputForm
+            display: flex
+            flex-direction: column
+            gap: 1rem
+
+            label
+
+            input
+                padding: 12px
+                border-radius: 5px
+                border: 1px solid $text-primary
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1)
+            
+        .btn
+            width: 150px
+            align-self: center
+            @include button($bg-color-btn: $bg-btn, $text-color: $text-info )
+                
