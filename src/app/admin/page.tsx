@@ -4,6 +4,8 @@ import '../../styles/layouts/stylesForms.sass'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useState } from 'react'
 import {useRouter} from 'next/navigation'
+import { useActionState } from 'react';
+import { authenticate } from '../lib/actions'
 
 interface AdminPageProps {
 
@@ -16,7 +18,6 @@ interface IFormInput {
 
 
 export default function AdminPage(props : AdminPageProps){
-    const [errorMessage, setErrorMessage] = useState<string>('')
     const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>();
 
     const router = useRouter()
@@ -27,12 +28,8 @@ export default function AdminPage(props : AdminPageProps){
 
    
     const handlerRequestLogin = (data: IFormInput) => {
-        const url = 'http://localhost:8080/api'
-
-        const payloadJSON ={
-            username: data.usermail,
-            password: data.password
-        }
+        authenticate(undefined, data)
+        /* const url = 'http://localhost:8000/api'
     
         fetch(
             url + '/user/login',{
@@ -56,18 +53,27 @@ export default function AdminPage(props : AdminPageProps){
             })
             .catch((err) => {
                 console.log(err)
-            })
+            }) */
     }
 
     const onSubmit: SubmitHandler<IFormInput> = data => {
         handlerRequestLogin(data)
     }
 
+    /* const [errorMessage, formAction, isPending] = useActionState(
+        authenticate,
+        undefined,
+      ); */
+
     
     return (
 
         <div className={'formsContainer'}>      
-            <form onSubmit={handleSubmit(onSubmit)} className={'formContent'}>
+            <form 
+            onSubmit={handleSubmit(onSubmit)} 
+            className={'formContent'}
+            //action={formAction}
+            >
                 <div className={`inputForm`}> 
                     <label htmlFor='usermail' >E-mail</label>
                     <input 
@@ -97,7 +103,7 @@ export default function AdminPage(props : AdminPageProps){
                     />
                 </div>
                 {errors.password && <span className='errorMessage'>{errors.password.message}</span>}
-                {errorMessage != '' && <span className='errorMessage'>{errorMessage}</span>}
+                {/* {errorMessage && <span className='errorMessage'>{errorMessage}</span>} */}
                 <button type="submit" className='btn'>Submit</button>
             </form>
         </div>
