@@ -1,6 +1,15 @@
 import type { NextAuthConfig } from 'next-auth';
-import { isAuthenticated } from './hooks/useAuth';
 import { cookies } from 'next/headers';
+import { isTokenValid } from './utils/tokenUser';
+
+type userPayload = {
+  message: string
+  data: {
+    token: string
+    username: string
+    userType: string
+  }
+}
  
 export const authConfig = {
   pages: {
@@ -9,15 +18,26 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const cookiesSession = cookies()
-      const userData = cookiesSession.get('user')
-      const isLoggedIn = userData ? true : false
+      const userCookie = cookiesSession.get('user')
+      let userData: userPayload | undefined;
+
+      // verificando sessão do usuário pelos cookies
+      if (userCookie?.value) {
+        try {
+          userData = JSON.parse(userCookie.value) as userPayload;
+        } catch (error) {
+          console.error("Erro ao fazer o parse do cookie:", error);
+          userData = undefined;
+        }
+      }
+
+      const isLoggedIn = userData ? isTokenValid(userData.data.token) : false
       const isOnDashboard = nextUrl.pathname == '/admin/manager-page'
       if (isOnDashboard) {
         if (isLoggedIn) 
           return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn && nextUrl.pathname == '/admin') {
-        console.log('aqui')
         return Response.redirect(new URL('/admin/manager-page', nextUrl));
       }
       return true;
