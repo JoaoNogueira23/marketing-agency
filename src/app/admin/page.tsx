@@ -1,9 +1,8 @@
 "use client"
-
 import '../../styles/layouts/stylesForms.sass'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import {useRouter} from 'next/navigation'
 import { authenticate } from '../lib/actions'
+import { useState } from 'react'
 
 interface AdminPageProps {
 
@@ -17,9 +16,17 @@ interface IFormInput {
 
 export default function AdminPage(props : AdminPageProps){
     const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>();
+    const [errorPromise, setErrorPromisse] = useState<string>('')
 
     const handlerRequestLogin = (data: IFormInput) => {
         authenticate(undefined, data)
+            .then((response) => {
+                console.log(response)
+                setErrorPromisse('error')
+            })
+            .catch((error) => {
+                setErrorPromisse(error)
+            })
     }
 
     const onSubmit: SubmitHandler<IFormInput> = data => {
@@ -63,7 +70,7 @@ export default function AdminPage(props : AdminPageProps){
                     />
                 </div>
                 {errors.password && <span className='errorMessage'>{errors.password.message}</span>}
-                {/* {errorMessage && <span className='errorMessage'>{errorMessage}</span>} */}
+                {errorPromise && <span className='errorMessage'>{errorPromise}</span>}
                 <button type="submit" className='btn'>Submit</button>
             </form>
         </div>
