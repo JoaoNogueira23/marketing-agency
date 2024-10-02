@@ -1,14 +1,21 @@
-import { isAuthenticated } from "./auth/Auth";
+
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { isAuthenticated } from "./hooks/useAuth";
+import NextAuth from "next-auth";
+import { authConfig } from "./auth.config";
 
 
 const protectedRoutes = ["/admin/manager-page"];
 
+export default NextAuth(authConfig).auth;
 
-export default function middleware(req: NextRequest) {
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  /* console.log(isAuthenticated)
   if (!isAuthenticated && protectedRoutes.includes(req.nextUrl.pathname)) {
     const absoluteURL = new URL("/", req.nextUrl.origin);
     return NextResponse.redirect(absoluteURL.toString());
-  }
+  } */
 }

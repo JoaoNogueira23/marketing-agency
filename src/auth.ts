@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { authConfig } from './auth.config';
+import { cookies } from 'next/headers';
 
 interface IFormInput {
   usermail: string
@@ -12,6 +13,7 @@ export const { auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       async authorize(credentials, request) {
+        const cookiesSession = cookies()
         const { usermail, password } = credentials as unknown as IFormInput;
         const url = 'http://localhost:8000/api'
         // logica de autenticação (request na minha api)
@@ -32,13 +34,14 @@ export const { auth, signIn, signOut } = NextAuth({
         // Verificação da resposta
         if (response.ok) {
           const user = await response.json();
-          // Retornar os dados do usuário para serem usados pelo NextAuth
-          return user;
+          cookiesSession.set('user', JSON.stringify(user))
+          return user
         } else {
           // Se a autenticação falhar, retornar null
           return null;
         }
       },
-    }),
+    })
   ],
+
 });

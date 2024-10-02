@@ -2,9 +2,7 @@
 
 import '../../styles/layouts/stylesForms.sass'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useState } from 'react'
 import {useRouter} from 'next/navigation'
-import { useActionState } from 'react';
 import { authenticate } from '../lib/actions'
 
 interface AdminPageProps {
@@ -20,52 +18,14 @@ interface IFormInput {
 export default function AdminPage(props : AdminPageProps){
     const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>();
 
-    const router = useRouter()
-
-    const handleRouteChange = () => {
-        router.push(`/admin/manager-page`)
-    }
-
-   
     const handlerRequestLogin = (data: IFormInput) => {
         authenticate(undefined, data)
-        /* const url = 'http://localhost:8000/api'
-    
-        fetch(
-            url + '/user/login',{
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/x-www-form-urlencoded'
-              },    
-              body: new URLSearchParams({
-                  'username': data.usermail,
-                  'password': data.password,
-                  'grant_type': 'password'
-              })
-            }
-        )
-            .then((response) => {
-                if(response.status == 200){
-                    handleRouteChange()
-                }else if(response.status == 401){
-                    setErrorMessage("User not registered!")
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            }) */
     }
 
     const onSubmit: SubmitHandler<IFormInput> = data => {
         handlerRequestLogin(data)
     }
 
-    /* const [errorMessage, formAction, isPending] = useActionState(
-        authenticate,
-        undefined,
-      ); */
-
-    
     return (
 
         <div className={'formsContainer'}>      
