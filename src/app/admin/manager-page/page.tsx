@@ -1,3 +1,4 @@
+"use client"
 import '../../../styles/layouts/stylesManegerPage.sass'
 
 interface ManegerPageProps {

@@ -2,6 +2,8 @@
  
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { SignInResponse } from 'next-auth/react';
+import { cookies } from 'next/headers';
  
 // ...
 
@@ -15,15 +17,13 @@ export async function authenticate(
   formData: IFormInput,
 ) {
   try {
-    await signIn('credentials', formData);
+    const response: SignInResponse = await signIn('credentials', formData);
+
+    return response
+    
   } catch (error) {
     if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Invalid credentials.';
-        default:
-          return 'Something went wrong.';
-      }
+      return error.message.split(' .Read')[0].toString()
     }
     throw error;
   }

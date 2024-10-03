@@ -4,6 +4,8 @@ import '../../styles/layouts/stylesForms.sass'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {useRouter} from 'next/navigation'
 import { authenticate } from '../lib/actions'
+import { cookies } from 'next/headers'
+import { useState } from 'react'
 
 interface AdminPageProps {
 
@@ -14,12 +16,25 @@ interface IFormInput {
     password: string
 }
 
+type responseApi = string | undefined
+
 
 export default function AdminPage(props : AdminPageProps){
     const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>();
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     const handlerRequestLogin = (data: IFormInput) => {
         authenticate(undefined, data)
+            .then((resp) => {
+                if (typeof resp === 'string') {
+                    setErrorMessage(resp);
+                  } else {
+                    console.log(resp);
+                  }
+            })
+            .catch(err => {
+                setErrorMessage("Unexpected error")
+            })
     }
 
     const onSubmit: SubmitHandler<IFormInput> = data => {
@@ -63,7 +78,7 @@ export default function AdminPage(props : AdminPageProps){
                     />
                 </div>
                 {errors.password && <span className='errorMessage'>{errors.password.message}</span>}
-                {/* {errorMessage && <span className='errorMessage'>{errorMessage}</span>} */}
+                {errorMessage && <span className='errorMessage'>{errorMessage}</span>}
                 <button type="submit" className='btn'>Submit</button>
             </form>
         </div>

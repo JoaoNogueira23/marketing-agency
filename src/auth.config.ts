@@ -17,6 +17,7 @@ export const authConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
+      console.log('veja:', auth)
       const cookiesSession = cookies()
       const userCookie = cookiesSession.get('user')
       let userData: userPayload | undefined;
@@ -44,4 +45,5 @@ export const authConfig = {
     },
   },
   providers: [], // Add providers with an empty array for now
+  secret: process.env.NEXTAUTH_SECRET
 } satisfies NextAuthConfig;

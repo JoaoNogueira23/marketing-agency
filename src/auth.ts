@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth';
+import NextAuth, { AuthError } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { authConfig } from './auth.config';
 import { cookies } from 'next/headers';
-
+//import { AuthorizeError} from 'next-auth/errors' talvez depois
 interface IFormInput {
   usermail: string
   password: string
@@ -37,8 +37,8 @@ export const { auth, signIn, signOut } = NextAuth({
           cookiesSession.set('user', JSON.stringify(user))
           return user
         } else {
-          // Se a autenticação falhar, retornar null
-          return null;
+          const responseError = await response.json()
+          throw new AuthError(responseError.message || 'Authentication failed')
         }
       },
     })
