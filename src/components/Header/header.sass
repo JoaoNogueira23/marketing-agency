@@ -2,11 +2,11 @@
 @import "../../styles/buttons"
     
 .header
-    @extend %paddings
     z-index: 100
     width: 100vw
     height: 100px
     position: fixed
+    color: $black-color
     background-color: $bg-primary
     display: flex
     flex-direction: row
@@ -18,7 +18,9 @@
 
 
     .nav
+        padding-right: 250px
         ul
+            
             display: flex
             flex-direction: row
             gap: 32px
@@ -41,6 +43,7 @@
                         transform: translateY(-5px)
                         
     .logo
+        padding-left: 250px
         color: $text-secondary
         transition: .3s
         text-decoration: none

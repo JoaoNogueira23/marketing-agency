@@ -1,7 +1,8 @@
-import Link from 'next/link'
+import Link from "next/link"
+import React from "react"
 import './header.sass'
 
-export default function Header() {
+export default function HeaderAdmin(){
     return(
         <header className="header">
             <h2>
@@ -13,20 +14,17 @@ export default function Header() {
             <nav className='nav'>
                 <ul>
                     <li>
-                        <a href='#'>About Us</a>
+                        <Link href={'/admin/dashboard'}>
+                            Dashboard
+                        </Link>
                     </li>
                     <li>
-                        <a href='#'>Services & Pricing</a>
-                    </li>
-                    <li>
-                        <a href='#'>Blog</a>
-                    </li>
-                    <li>
-                        <a href='#'>Contact Us</a>
+                        <Link href={'/admin/create-post'}>
+                            Register Post
+                        </Link>
                     </li>
                 </ul>
             </nav>
-
         </header>
     )
 }

@@ -17,19 +17,28 @@
         flex-direction: column
         gap: 1rem
         width: 30vw
+
+        .titleForms
+            color: $purple-color
+            
+
         
         .inputForm
             display: flex
             flex-direction: column
             gap: 1rem
 
-            label
-
-            input
+            input, textarea
                 padding: 12px
                 border-radius: 5px
                 border: 1px solid $text-primary
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1)
+            
+            textarea
+                min-height: 50px
+                max-height: 100px
+                resize: vertical
+            
             
         .btn
             width: 150px

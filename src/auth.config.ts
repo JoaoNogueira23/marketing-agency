@@ -33,13 +33,13 @@ export const authConfig = {
       }
 
       const isLoggedIn = userData ? isTokenValid(userData.data.token) : false
-      const isOnDashboard = nextUrl.pathname == '/admin/manager-page'
+      const isOnDashboard = nextUrl.pathname == '/admin/dashboard'
       if (isOnDashboard) {
         if (isLoggedIn) 
           return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn && nextUrl.pathname == '/admin') {
-        return Response.redirect(new URL('/admin/manager-page', nextUrl));
+        return Response.redirect(new URL('/admin/dashboard', nextUrl));
       }
       return true;
     },

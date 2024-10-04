@@ -1,10 +1,17 @@
+import Header from "@/components/Header/Header"
+import React from "react"
+
 interface BlogPageProps {
 
 }
 export default function BlogPage(props : BlogPageProps){
     return(
         <>
-            Blog
+            <Header />
+            <div>
+             Blog
+            </div>
+            
         </>
     )
 }

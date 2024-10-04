@@ -1,10 +1,7 @@
 "use client"
 
-import '../../styles/layouts/stylesForms.sass'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import {useRouter} from 'next/navigation'
 import { authenticate } from '../lib/actions'
-import { cookies } from 'next/headers'
 import { useState } from 'react'
 
 interface AdminPageProps {
@@ -15,8 +12,6 @@ interface IFormInput {
     usermail: string
     password: string
 }
-
-type responseApi = string | undefined
 
 
 export default function AdminPage(props : AdminPageProps){
