@@ -3,6 +3,7 @@
 
 .formsContainer
     @extend %paddings
+    position: relative
     display: flex
     flex-direction: column
     color: $black-color
@@ -12,17 +13,16 @@
     align-content: center
     align-items: center
 
+    .titleForms
+        color: $purple-color
+        margin: 2rem 0
+
     .formContent
         display: flex
         flex-direction: column
         gap: 1rem
         width: 30vw
 
-        .titleForms
-            color: $purple-color
-            
-
-        
         .inputForm
             display: flex
             flex-direction: column
@@ -34,13 +34,19 @@
                 border: 1px solid $text-primary
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1)
             
-            textarea
+            
+            .textarea
                 min-height: 50px
                 max-height: 100px
                 resize: vertical
+
+                &-medium
+                    min-height: 100px
+                    max-height: 200px
             
             
         .btn
+            margin-top: 1rem
             width: 150px
             align-self: center
             @include button($bg-color-btn: $bg-btn, $text-color: $text-info )

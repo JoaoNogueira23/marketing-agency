@@ -15,6 +15,7 @@ export function isTokenValid(token: string): boolean {
 
     // Verificar se o token expirou
     if (decodedToken.exp < currentTime) {
+      console.log('token expirado')
       return false; // Token expirado
     }
 

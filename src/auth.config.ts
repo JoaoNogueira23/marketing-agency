@@ -17,7 +17,6 @@ export const authConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      console.log('veja:', auth)
       const cookiesSession = cookies()
       const userCookie = cookiesSession.get('user')
       let userData: userPayload | undefined;

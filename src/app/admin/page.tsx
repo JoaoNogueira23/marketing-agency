@@ -4,17 +4,13 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { authenticate } from '../lib/actions'
 import { useState } from 'react'
 
-interface AdminPageProps {
-
-}
-
 interface IFormInput {
     usermail: string
     password: string
 }
 
 
-export default function AdminPage(props : AdminPageProps){
+export default function AdminPage(){
     const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>();
     const [errorMessage, setErrorMessage] = useState<string>('')
 
@@ -24,7 +20,7 @@ export default function AdminPage(props : AdminPageProps){
                 if (typeof resp === 'string') {
                     setErrorMessage(resp);
                   } else {
-                    console.log(resp);
+                    //console.log(resp);
                   }
             })
             .catch(err => {
@@ -42,7 +38,6 @@ export default function AdminPage(props : AdminPageProps){
             <form 
             onSubmit={handleSubmit(onSubmit)} 
             className={'formContent'}
-            //action={formAction}
             >
                 <div className={`inputForm`}> 
                     <label htmlFor='usermail' >E-mail</label>

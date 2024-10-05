@@ -4,7 +4,7 @@ import './header.sass'
 
 export default function HeaderAdmin(){
     return(
-        <header className="header">
+        <header className="headerAdmin">
             <h2>
                 <Link href={'/'} className='logo'>
                     Agency
