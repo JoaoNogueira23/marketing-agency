@@ -3,12 +3,7 @@ import { cookies } from 'next/headers';
 import { isTokenValid } from './utils/tokenUser';
 
 type userPayload = {
-  message: string
-  data: {
-    token: string
-    username: string
-    userType: string
-  }
+  token: string
 }
  
 export const authConfig = {
@@ -18,20 +13,20 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const cookiesSession = cookies()
-      const userCookie = cookiesSession.get('user')
-      let userData: userPayload | undefined;
+      const userCookie = cookiesSession.get('session')
+      let userSession: string | undefined
 
       // verificando sessão do usuário pelos cookies
       if (userCookie?.value) {
         try {
-          userData = JSON.parse(userCookie.value) as userPayload;
+          userSession = String(JSON.parse(userCookie.value))
+          
         } catch (error) {
           console.error("Erro ao fazer o parse do cookie:", error);
-          userData = undefined;
         }
       }
 
-      const isLoggedIn = userData ? isTokenValid(userData.data.token) : false
+      const isLoggedIn = userSession ? isTokenValid(userSession) : false
       const isOnDashboard = nextUrl.pathname == '/admin/dashboard'
       if (isOnDashboard) {
         if (isLoggedIn) 

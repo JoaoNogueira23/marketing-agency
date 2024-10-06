@@ -1,7 +1,7 @@
 "use client"
 
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { authenticate } from '../lib/actions'
+import { signInAction } from '../lib/actions'
 import { useState } from 'react'
 
 interface IFormInput {
@@ -15,7 +15,7 @@ export default function AdminPage(){
     const [errorMessage, setErrorMessage] = useState<string>('')
 
     const handlerRequestLogin = (data: IFormInput) => {
-        authenticate(undefined, data)
+        signInAction(undefined, data)
             .then((resp) => {
                 if (typeof resp === 'string') {
                     setErrorMessage(resp);
@@ -32,12 +32,15 @@ export default function AdminPage(){
         handlerRequestLogin(data)
     }
 
+
     return (
 
-        <div className={'formsContainer'}>      
+        <div className={'formsContainer'}>
+            <h2 className='titleForms'>Login Admin</h2>
+
             <form 
-            onSubmit={handleSubmit(onSubmit)} 
             className={'formContent'}
+            onSubmit={handleSubmit(onSubmit)} 
             >
                 <div className={`inputForm`}> 
                     <label htmlFor='usermail' >E-mail</label>

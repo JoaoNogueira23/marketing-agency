@@ -21,7 +21,7 @@ export function isTokenValid(token: string): boolean {
 
     return true; // Token ainda é válido
   } catch (error) {
-    console.error("Token inválido ou erro ao decodificar:", error);
+      console.error("Token inválido ou erro ao decodificar:", error);
     return false; // Token inválido
   }
 }

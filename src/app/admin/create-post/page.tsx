@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect } from "react";
+import Dropzone from "@/components/Forms/dropZone";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface IFormInput {
@@ -8,23 +9,58 @@ interface IFormInput {
     resume: string
     acthor: string
     paragraphs: string
-    urlImage?: string
+}
+
+interface DropzoneProps {
+    onFileUpload: (files: File[]) => void;
 }
 
 export default function PageRegisterPost(){
     const {register, handleSubmit, formState: {errors}, watch} = useForm<IFormInput>();
 
-
     const onSubmit: SubmitHandler<IFormInput> = data => {
+        const formData = new FormData()
 
+        formData.append("title", data.title)
+        formData.append("resume", data.resume)
+       
         const listParagraphs = data.paragraphs.split("\n")
 
         const paragraphs = listParagraphs.filter(item => item !== "")
 
-        const sendPost = {...data, paragraphs: paragraphs}
+        formData.append("paragraphs",JSON.stringify(paragraphs))
 
-        console.log(sendPost)
+        formData.append("image", uploadedFiles[0])
+
+        formData.append("acthor", data.acthor)
+        handlerRequest(formData)
     }
+
+    const handlerRequest = async (data: FormData) => {
+
+        const url = 'http://localhost:8000/api'
+        // logica de autenticação (request na minha api)
+        const response = await fetch(
+            url + '/posts/create-post',
+            {
+            method: 'POST',    
+            body: data
+            }
+        )
+
+        if(response.ok){
+            alert("Post created with sucess!")
+        }else{
+            alert("Error on request")
+        }
+    }
+
+    // configs dropzone
+    const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+
+    const handleFileUpload = (files: File[]) => {
+        setUploadedFiles(files);
+    };
 
     return(
         <div className="contentCreatePost">
@@ -89,9 +125,21 @@ export default function PageRegisterPost(){
                         />
                         {errors.acthor && <span className="errorMessage">{errors.acthor.message}</span>}
                     </div>
-                    {/* field dynamic for text with paragraphs separate */}
-
                     {/* drop zone for image post */}
+                    
+                    <div className="inputForm">
+                        <label>Upload Image</label>
+                        <Dropzone 
+                        onFileUpload={handleFileUpload}
+                        />
+                        <ul>
+                            {uploadedFiles.map((file) => (
+                            <li key={file.name}>{file.name}</li>
+                            ))}
+                        </ul>
+                        
+                    </div>
+                    
 
                     <button type="submit" className='btn'>Create</button>
 

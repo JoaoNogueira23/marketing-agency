@@ -22,7 +22,7 @@ export const { auth, signIn, signOut } = NextAuth({
             method: 'POST',
             headers:{
                 'Content-Type': 'application/x-www-form-urlencoded'
-              },    
+            },    
               body: new URLSearchParams({
                   'username': usermail,
                   'password': password,
@@ -34,7 +34,7 @@ export const { auth, signIn, signOut } = NextAuth({
         // Verificação da resposta
         if (response.ok) {
           const user = await response.json();
-          cookiesSession.set('user', JSON.stringify(user))
+          cookiesSession.set('session', JSON.stringify(user.data.token))
           return user
         } else {
           const responseError = await response.json()
