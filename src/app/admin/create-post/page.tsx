@@ -9,6 +9,7 @@ interface IFormInput {
     resume: string
     acthor: string
     paragraphs: string
+    Image?: string
 }
 
 interface DropzoneProps {
@@ -17,40 +18,61 @@ interface DropzoneProps {
 
 export default function PageRegisterPost(){
     const {register, handleSubmit, formState: {errors}, watch} = useForm<IFormInput>();
+    const [errorDrop, setErrorDrop] = useState<string>("")
 
-    const onSubmit: SubmitHandler<IFormInput> = data => {
-        const formData = new FormData()
+    const convertToBase64 = (file: any) => {
+        return new Promise<string | null>((resolve, reject) => {
+          const reader = new FileReader();
+      
+          reader.readAsDataURL(file);  // Converte a imagem para base64
+      
+          reader.onload = () => {
+            const result = reader.result as string;  
+      
+            if (result) {
+              resolve(result.split(',')[1]); 
+            } else {
+              reject(new Error("Failed to convert file to base64"));
+            }
+          };
+      
+          reader.onerror = (error) => reject(error);
+        });
+      };
+      
+      
 
-        formData.append("title", data.title)
-        formData.append("resume", data.resume)
-       
+    const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+        
         const listParagraphs = data.paragraphs.split("\n")
 
         const paragraphs = listParagraphs.filter(item => item !== "")
 
-        formData.append("paragraphs",JSON.stringify(paragraphs))
+        const imageBase64 = await convertToBase64(uploadedFiles[0])
 
-        formData.append("image", uploadedFiles[0])
+        const formData = {...data, paragraphs: JSON.stringify(paragraphs), image: imageBase64}
 
-        formData.append("acthor", data.acthor)
         handlerRequest(formData)
     }
 
-    const handlerRequest = async (data: FormData) => {
-
-        const url = 'http://localhost:8000/api'
+    const handlerRequest = async (data: IFormInput) => {
+        const url = 'http://localhost:8080/api'
         // logica de autenticação (request na minha api)
         const response = await fetch(
             url + '/posts/create-post',
             {
-            method: 'POST',    
-            body: data
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },    
+            body: JSON.stringify(data)
             }
         )
 
         if(response.ok){
             alert("Post created with sucess!")
         }else{
+            console.log(response)
             alert("Error on request")
         }
     }
@@ -131,13 +153,14 @@ export default function PageRegisterPost(){
                         <label>Upload Image</label>
                         <Dropzone 
                         onFileUpload={handleFileUpload}
+                        setErrorDrop={setErrorDrop}
                         />
                         <ul>
                             {uploadedFiles.map((file) => (
                             <li key={file.name}>{file.name}</li>
                             ))}
                         </ul>
-                        
+                        {errorDrop != "" && <span className="errorMessage">{errorDrop}</span>}
                     </div>
                     
 
@@ -149,4 +172,8 @@ export default function PageRegisterPost(){
         </div>
         
     )
+}
+
+function convertToBase64(arg0: File) {
+    throw new Error("Function not implemented.");
 }

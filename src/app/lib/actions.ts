@@ -12,6 +12,14 @@ interface IFormInput {
   usermail: string
   password: string
 }
+
+interface IFormInputPost {
+  title: string
+  resume: string
+  acthor: string
+  paragraphs: string
+  Image?: string
+}
  
 export async function signInAction(
   state: FormState,
@@ -26,5 +34,35 @@ export async function signInAction(
       return error.message.split(' .Read')[0].toString()
     }
     throw error;
+  }
+}
+
+export async function crestePostAction(
+  formData: IFormInputPost
+) 
+{
+  try{
+      const url = 'http://localhost:8080/api'
+      // logica de autenticação (request na minha api)
+      const response = await fetch(
+          url + '/posts/create-post',
+          {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },    
+          body: JSON.stringify(formData)
+          }
+      )
+
+      if(response.ok){
+          alert("Post created with sucess!")
+      }else{
+          console.log(response)
+          alert("Error on request")
+      }
+  }
+  catch (err) {
+    console.log(err)
   }
 }

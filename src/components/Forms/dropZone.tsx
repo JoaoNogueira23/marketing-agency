@@ -3,13 +3,37 @@ import { useDropzone } from 'react-dropzone';
 
 interface DropzoneProps {
   onFileUpload: (files: File[]) => void;
+  setErrorDrop: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Dropzone: React.FC<DropzoneProps> = ({ onFileUpload }) => {
+const Dropzone: React.FC<DropzoneProps> = ({ onFileUpload, setErrorDrop }) => {
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    // Aqui você pode manipular os arquivos carregados, como enviá-los para um servidor
-    onFileUpload(acceptedFiles);
-  }, [onFileUpload]);
+    acceptedFiles.forEach((file) => {
+      const reader = new FileReader();
+      const maxWidth = 300
+      const maxHeight = 300
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target?.result as string;
+
+        img.onload = () => {
+          const width = img.width;
+          const height = img.height;
+          if (width <= maxWidth && height <= maxHeight) {
+            onFileUpload(acceptedFiles);
+            // Agora você pode processar a imagem, como enviá-la para o backend
+          } else {
+            setErrorDrop(`Image rejected. Dimensions: ${width}x${height}. Maximum allowed: ${maxWidth}x${maxHeight}`)
+    
+          }
+        };
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }, []);
+
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

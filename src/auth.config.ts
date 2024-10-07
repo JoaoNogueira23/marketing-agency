@@ -27,7 +27,7 @@ export const authConfig = {
       }
 
       const isLoggedIn = userSession ? isTokenValid(userSession) : false
-      const isOnDashboard = nextUrl.pathname == '/admin/dashboard'
+      const isOnDashboard = nextUrl.pathname == '/admin/dashboard' || nextUrl.pathname == '/admin/create-post'
       if (isOnDashboard) {
         if (isLoggedIn) 
           return true;
