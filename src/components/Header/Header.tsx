@@ -16,10 +16,9 @@ export default function Header() {
                         <a href='#'>About Us</a>
                     </li>
                     <li>
-                        <a href='#'>Services & Pricing</a>
-                    </li>
-                    <li>
-                        <a href='#'>Blog</a>
+                        <Link href={'/blog'}>
+                            Blog
+                        </Link>
                     </li>
                     <li>
                         <a href='#'>Contact Us</a>

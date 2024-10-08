@@ -42,7 +42,7 @@ export async function crestePostAction(
 ) 
 {
   try{
-      const url = 'http://localhost:8080/api'
+      const url = process.env.NEXT_PRIVATE_API_URL
       // logica de autenticação (request na minha api)
       const response = await fetch(
           url + '/posts/create-post',

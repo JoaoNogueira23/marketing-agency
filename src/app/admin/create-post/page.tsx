@@ -56,7 +56,7 @@ export default function PageRegisterPost(){
     }
 
     const handlerRequest = async (data: IFormInput) => {
-        const url = 'http://localhost:8080/api'
+        const url = process.env.NEXT_PRIVATE_API_URL
         // logica de autenticação (request na minha api)
         const response = await fetch(
             url + '/posts/create-post',

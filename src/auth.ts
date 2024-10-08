@@ -16,7 +16,8 @@ export const { auth, signIn, signOut } = NextAuth({
         console.log('iniciando request')
         const cookiesSession = cookies()
         const { usermail, password } = credentials as unknown as IFormInput;
-        const url = 'http://localhost:8080/api'
+        const url = process.env.NEXT_PRIVATE_API_URL
+        console.log(url)
         // logica de autenticação (request na minha api)
         const response = await fetch(
             url + '/user/login',{

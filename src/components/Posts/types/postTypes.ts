@@ -9,3 +9,12 @@ export interface PropsPost {
     sectionTitle: string;
     catchphrase: string;
 }
+
+export interface Post {
+    title: string
+    resume: string
+    rawText: string[]
+    publishedData: string
+    postId: string
+    acthor: string
+}
