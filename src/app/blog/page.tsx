@@ -2,6 +2,7 @@ import BlogPost from "@/components/BlogPost"
 import Header from "@/components/Header/Header"
 import React from "react"
 import { Post } from './../../components/Posts/types/postTypes';
+import CardPost from "@/components/CardPost";
 
 
 interface BlogPageProps {
@@ -13,7 +14,7 @@ type ResponseRequest = {
             title: string
             resume: string
             rawText: string
-            publishedData: string
+            publishedDate: string
             postId: string
             acthor: string
     }[]
@@ -28,20 +29,24 @@ export default async function BlogPage(props : BlogPageProps){
     })
     let posts: ResponseRequest = await data.json()
 
+    const firstPost = posts.items[0]
+
     return(
         <>
             <Header />
             <div className="containerBlog">
-                {posts.items.map(post=> (
-                    <BlogPost 
+
+                {/* Slider with  */}
+                {posts.items.map(post => (
+                    <CardPost 
                     title={post.title}
-                    resume={post.resume}
-                    rawText={post.rawText}
-                    postId={post.postId}
-                    acthor={post.acthor}
-                    publishedDate={post.publishedData}
+                    publishedDate={post.publishedDate}
+                    urlImage="https://storage.cloud.google.com/blog-content-s3/posts/20241007/1ef85076-48bf-6486-a79f-2bcd2a62c6b6.webp"
                     />
                 ))}
+
+
+
             </div>
             
         </>

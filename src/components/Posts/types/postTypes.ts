@@ -14,7 +14,7 @@ export interface Post {
     title: string
     resume: string
     rawText: string[]
-    publishedData: string
+    publishedDate: string
     postId: string
     acthor: string
 }
