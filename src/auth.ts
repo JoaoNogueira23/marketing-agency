@@ -13,7 +13,6 @@ export const { auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       async authorize(credentials, request) {
-        console.log('iniciando request')
         const cookiesSession = cookies()
         const { usermail, password } = credentials as unknown as IFormInput;
         const url = process.env.NEXT_PRIVATE_API_URL
@@ -35,6 +34,7 @@ export const { auth, signIn, signOut } = NextAuth({
  
         // Verificação da resposta
         if (response.ok) {
+          console.log('sucesso no login')
           const user = await response.json();
           cookiesSession.set('session', JSON.stringify(user.data.token))
           return user
