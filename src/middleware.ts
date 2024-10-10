@@ -8,7 +8,7 @@ export default NextAuth(authConfig).auth;
 
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: ['/admin/', '/admin/dashboard', '/admin/create-post'],
   /* console.log(isAuthenticated)
   if (!isAuthenticated && protectedRoutes.includes(req.nextUrl.pathname)) {
     const absoluteURL = new URL("/", req.nextUrl.origin);
