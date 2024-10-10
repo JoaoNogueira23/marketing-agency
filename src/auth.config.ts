@@ -6,7 +6,7 @@ type userPayload = {
   token: string
 }
 
-const regex = /^\/admin\/.*/;
+const regex = /^\/admin\/.+/;
  
 export const authConfig = {
   pages: {
@@ -29,14 +29,17 @@ export const authConfig = {
       }
 
       const isLoggedIn = userSession ? isTokenValid(userSession) : false
+      console.log('path:', nextUrl.pathname)
       const isOnDashboard = regex.test(nextUrl.pathname)
       console.log(isLoggedIn)
       console.log(isOnDashboard)
+      console.log('regex:', regex.test(nextUrl.pathname))
       if (isOnDashboard) {
         if (isLoggedIn) 
           return true;
         return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn && regex.test(nextUrl.pathname)) {
+      } 
+      else if (isLoggedIn && regex.test(nextUrl.pathname) || isLoggedIn && nextUrl.pathname == '/admin/') {
         console.log('redirecionando...')
         return Response.redirect(new URL('/admin/dashboard', nextUrl));
       }
