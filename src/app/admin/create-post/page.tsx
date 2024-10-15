@@ -43,20 +43,25 @@ export default function PageRegisterPost(){
       
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-        
-        const listParagraphs = data.paragraphs.split("\n")
 
-        const paragraphs = listParagraphs.filter(item => item !== "")
+        console.log(data.resume.length)
+        if(data.resume.length > 255){
+            alert("O resumo deve ter apenas 255 caracteres!")
+        }else{
+            const listParagraphs = data.paragraphs.split("\n")
 
-        const imageBase64 = await convertToBase64(uploadedFiles[0])
+            const paragraphs = listParagraphs.filter(item => item !== "")
 
-        const formData = {...data, paragraphs: JSON.stringify(paragraphs), image: imageBase64}
+            const imageBase64 = await convertToBase64(uploadedFiles[0])
 
-        handlerRequest(formData)
+            const formData = {...data, paragraphs: JSON.stringify(paragraphs), image: imageBase64}
+
+            handlerRequest(formData)
+        }
     }
 
     const handlerRequest = async (data: IFormInput) => {
-        const url = process.env.NEXT_PRIVATE_API_URL
+        const url = 'http://localhost:8000/api'
         // logica de autenticação (request na minha api)
         const response = await fetch(
             url + '/posts/create-post',

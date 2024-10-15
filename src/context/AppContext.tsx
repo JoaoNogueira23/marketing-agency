@@ -1,16 +1,18 @@
-import { createContext, PropsWithChildren } from "react";
-import { env } from "../settings/env";
-import { AppSettings } from "@/settings/AppSettings";
+"use client"
+import { Post } from "@/types/index.s";
+import { createContext, PropsWithChildren, useState } from "react";
 
 interface AppContextProps {
     apiURL: string;
     apiKey: string;
+    postsContext: Post[];
+    setPostsContext: React.Dispatch<React.SetStateAction<Post[]>>;
 }
 
 export const AppContext = createContext<AppContextProps>({} as AppContextProps)
 
 export const AppProvider = ({children}: PropsWithChildren) => {
-    const originURL = AppSettings.URL.origin
+    /* const originURL = AppSettings.URL.origin
 
     const getAPI = () => {
         if(originURL.includes('dev') || originURL.includes('localhost')){
@@ -27,15 +29,17 @@ export const AppProvider = ({children}: PropsWithChildren) => {
         else{
             throw new Error(`Não foi possível detectar a origem do servidor: "${originURL}"`)
         }
-    }
-
-    const apiURL = getAPI()['url']
-    const apiKey = getAPI()['key']
+    } */
+    const [postsContext, setPostsContext] = useState<Post[]>([])
+    const apiURL = 'http://localhost:8000/'
+    const apiKey = ''
 
     return(
         <AppContext.Provider value={{
             apiURL,
-            apiKey
+            apiKey,
+            postsContext,
+            setPostsContext
         }}>
             {children}
         </AppContext.Provider>

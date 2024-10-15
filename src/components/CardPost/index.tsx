@@ -7,7 +7,7 @@ interface CardPostProps {
 }
 export default function CardPost({publishedDate, title, urlImage} : CardPostProps){
     return(
-        <div className="containerCardPost">
+        <div className="containerCardPost" key={`card-${Math.random()}`}>
             <div className="cardInfos">
                 <h4 className="cardTitle">
                     {title}
@@ -17,12 +17,13 @@ export default function CardPost({publishedDate, title, urlImage} : CardPostProp
                     {publishedDate}
                 </div>
             </div>
-
+            
             <Image
                 className="cardPostImage"
                 width={150}
-                height={150 }
+                height={150}
                 alt="Post Image"
+                key={`image-${Math.random()}`}
                 unoptimized // sem essa teg que bloqueia a otimização automática do nextjs n carrega
                 src={urlImage}
             />
