@@ -33,15 +33,9 @@ export const { auth, signIn, signOut } = NextAuth({
         )
  
         // Verificação da resposta
-        if (response.ok) {
-          console.log('sucesso no login')
-          const user = await response.json();
-          cookiesSession.set('session', JSON.stringify(user.data.token))
-          return user
-        } else {
-          const responseError = await response.json()
-          throw new AuthError(responseError.message || 'Authentication failed')
-        }
+        const user = await response.json();
+        cookiesSession.set('session', JSON.stringify(user.data.token))
+        return user
       },
     })
   ],

@@ -17,6 +17,7 @@ export default function AdminPage(){
     const handlerRequestLogin = (data: IFormInput) => {
         signInAction(undefined, data)
             .then((resp) => {
+                console.log(data)
                 if (typeof resp === 'string') {
                     setErrorMessage(resp);
                   } else {
@@ -24,7 +25,8 @@ export default function AdminPage(){
                   }
             })
             .catch(err => {
-                setErrorMessage("Unexpected error")
+                console.log('error:', err)
+                setErrorMessage(err)
             })
     }
 

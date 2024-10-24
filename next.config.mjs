@@ -9,7 +9,21 @@ const nextConfig = {
             protocol: 'https',
             hostname: 'storage.cloud.google.com',
             port: '',
-            pathname: '/blog-content-s3/**',
+          },
+          {
+            protocol: 'https',
+            hostname: 'picsum.photos',
+            port: '',
+          },
+          {
+            protocol: 'https',
+            hostname: 'placekitten.com',
+            port: '',
+          },
+          {
+            protocol: 'https',
+            hostname: 'dummyimage.com',
+            port: '',
           },
         ],
     },

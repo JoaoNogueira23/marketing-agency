@@ -25,16 +25,10 @@ export async function signInAction(
   state: FormState,
   FormData: IFormInput
 ) {
-  try {
-    const response: SignInResponse = await signIn('credentials', FormData);
 
+    const response: SignInResponse = await signIn('credentials', FormData);
+    console.log('aqui:', response)
     return response
-  } catch (error) {
-    if (error instanceof AuthError) {
-      return error.message.split(' .Read')[0].toString()
-    }
-    throw error;
-  }
 }
 
 export async function crestePostAction(
