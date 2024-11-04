@@ -2,6 +2,8 @@
 
 export default function Loading() {
   <>
-    Loading...
+    <div className="loading">
+        Loading...
+    </div>
   </>
 }

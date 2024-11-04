@@ -18,3 +18,22 @@
     display: flex
     flex-direction: column
     gap: 2rem
+
+.loading-error
+    display: flex
+    flex-direction: column
+    gap: 2rem
+    align-content: center
+    justify-content: center
+    align-items: center
+    width: 100vw
+    height: 100vh
+
+    .title
+        @extend %title-error
+    
+    .btn
+        margin-top: 1rem
+        width: 150px
+        align-self: center
+        @include button($bg-color-btn: $bg-btn, $text-color: $text-info )
