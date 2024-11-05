@@ -1,6 +1,7 @@
-import Header from "@/components/Header/Header";
+"use client"
 import { Post } from "@/types/index.s"
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 type PostProps = {
     params: {
@@ -16,20 +17,45 @@ type ResponseRequest = {
     offset: number
 }
 
-export default async function PostPage(props : PostProps){
+export default function PostPage(props : PostProps){
+    const [loading, setLoading] = useState<Boolean>(false)
+    const [post, setPost] = useState<Post>() 
+    
 
-    const url = `${process.env.NEXT_PRIVATE_API_URL}/posts/get-posts?postId=${props.params.postId}`;
-    const data = await fetch(url, {
-        method: 'GET',
-        cache: 'no-store',
-    });
-    const response: ResponseRequest = await data.json();
+    const fetchData = async () => {
+        const url = `http://localhost:8000/api/posts/get-posts?postId=${props.params.postId}`;
 
-    const post = response.items[0]
+        const data = await fetch(url, {
+            method: 'GET',
+            cache: 'no-store',
+        });
+        const response: ResponseRequest = await data.json();
 
-    const urlImage = await post.urlImage
+        setPost(response.items[0])
+        
+        setLoading(true)
+    
+    }
 
-    return(
+    useEffect(() => {
+        fetchData()
+    }, [props])
+
+    // suspense loading
+    if(!loading){
+        return(
+            <div className="loading-error">
+                <div className="fakeImage"></div>
+    
+                <div className="fakeParagraphs"></div>
+                <div className="fakeParagraphs"></div>
+                <div className="fakeParagraphs"></div>
+            </div>
+        )
+    }
+
+    if(post){
+        return(
             <div className="contentPost">
                 <div className="postTitle">
                     {post.title}
@@ -40,7 +66,7 @@ export default async function PostPage(props : PostProps){
                     width={800}
                     height={400}
                     alt="Post Image"
-                    src={urlImage}
+                    src={post.urlImage}
                     key={`image-${Math.random()}`}
                 />
                 
@@ -61,5 +87,7 @@ export default async function PostPage(props : PostProps){
                     Publicado em {post.publishedDate}, por {post.acthor}
                 </div>
             </div>
-    )
+        )
+    }
+    
 }
