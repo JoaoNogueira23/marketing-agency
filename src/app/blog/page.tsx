@@ -18,10 +18,12 @@ type BlogPageProps = {
 };
 
 export default async function BlogPage({ searchParams }: BlogPageProps){
-    const limit = 10;
+    const limit = 50
+    const page = 1
+    const size = 10
     const offset = searchParams.offset ? parseInt(searchParams.offset) : 0;
 
-    const url = `${process.env.NEXT_PRIVATE_API_URL}/posts/get-posts?limit=${limit}&offset=${offset}`;
+    const url = `${process.env.NEXT_PRIVATE_API_URL}/posts/get-posts?limit=${limit}&offset=${offset}&page${page}`;
     const data = await fetch(url, {
         method: 'GET',
         cache: 'no-store',
@@ -30,16 +32,19 @@ export default async function BlogPage({ searchParams }: BlogPageProps){
     return(
         <>
             <Providers>
+                <Header />
                 <div className="containerBlogPage">
-                    <Header />
-                    <PostsLoader 
-                    posts={posts.items}
-                    />
                     <div>
-                        <a href={`?offset=${offset - limit}`} style={{ marginRight: '10px' }}>
+                        <PostsLoader 
+                        posts={posts.items}
+                        />
+                    </div>
+                    
+                    <div className="contentControl">
+                        <a className="btnControlData" href={`?offset=${offset - limit}`} style={{ marginRight: '10px' }}>
                             Anterior
                         </a>
-                        <a href={`?offset=${offset + limit}`}>
+                        <a className="btnControlData" href={`?offset=${offset + limit}`}>
                             Próximo
                         </a>
                     </div>

@@ -10,14 +10,27 @@
     @extend %paddings
     padding-top: 10rem
     margin-bottom: 1rem
-    height: calc( 100vh - 52px )
+    height: auto
     justify-items: center
     align-items: center
 
 .containerBlogPage
+    @extend %paddings
     display: flex
     flex-direction: column
     gap: 2rem
+    align-content: center
+    justify-content: center
+    align-items: center
+
+    .contentControl
+        align-self: flex-end
+
+        .btnControlData
+            margin-top: 1rem
+            width: 150px
+            align-self: center
+            @include button($bg-color-btn: $bg-btn, $text-color: $text-info )
 
 .loading-error
     display: flex

@@ -1,22 +1,30 @@
-'use client'
-
-import useAppContext from "@/hooks/useAppContext"
-import { Post as PostType} from "@/types/index.s"
+import { Post } from "@/types/index.s"
 import Image from "next/image";
 
-interface PostProps {
+type PostProps = {
     params: {
         postId: string
     }
     searchParams: {}[]
 }
 
-export default function Post(props : PostProps){
-    const {postsContext} = useAppContext()
-    console.log(postsContext)
+type ResponseRequest = {
+    items: Post[]
+    total: number
+    limit: number
+    offset: number
+}
 
-    const postId = props.params.postId
-    const post: PostType = postsContext.filter(obj => obj.postId == postId)[0]
+export default async function PostPage(props : PostProps){
+
+    const url = `${process.env.NEXT_PRIVATE_API_URL}/posts/get-posts?postId=${props.params.postId}`;
+    const data = await fetch(url, {
+        method: 'GET',
+        cache: 'no-store',
+    });
+    const response: ResponseRequest = await data.json();
+    console.log(response)
+    const post = response.items[0]
 
     return(
         <div className="contentPost">
