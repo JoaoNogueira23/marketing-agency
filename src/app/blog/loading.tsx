@@ -1,10 +1,9 @@
-interface LoadingBlogProps {
-
-}
-export default function LoadingBlog(props : LoadingBlogProps){
+export default function LoadingBlog(){
     return(
         <div className="loading-error">
-            Loading...
+            <div className="cardLoading"></div>
+            <div className="cardLoading"></div>
+            <div className="cardLoading"></div>
         </div>
 
     )
