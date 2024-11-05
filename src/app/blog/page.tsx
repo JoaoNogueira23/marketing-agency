@@ -23,7 +23,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps){
     const size = 10
     const offset = searchParams.offset ? parseInt(searchParams.offset) : 0;
 
-    const url = `${process.env.NEXT_PRIVATE_API_URL}/posts/get-posts?limit=${limit}&offset=${offset}&page${page}`;
+    const url = `${process.env.NEXT_PRIVATE_API_URL}/posts/get-posts?limit=${limit}&offset=${offset}&page${page}&size=${size}`;
     const data = await fetch(url, {
         method: 'GET',
         cache: 'no-store',

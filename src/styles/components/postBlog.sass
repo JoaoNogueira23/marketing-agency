@@ -2,13 +2,15 @@
 @import '../variables'
 
 .contentPost
-    margin-top: 2rem
+    margin-top: 4rem
     display: flex
     flex-direction: column
     gap: 2rem
-    text-justify: justify
     color: $text-primary
     align-items: center
+    justify-content: center
+    justify-items: center
+    @extend %paddings  
 
     .titlePost
         @extend %title-pattern

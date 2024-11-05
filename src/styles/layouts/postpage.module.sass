@@ -50,3 +50,27 @@
         width: 150px
         align-self: center
         @include button($bg-color-btn: $bg-btn, $text-color: $text-info )
+
+    .fakeImage
+        width: 400px
+        height: 300px
+        background-color: #ccc /* Cor de fundo cinza */
+        border-radius: 8px /* Borda arredondada opcional */
+
+    .fakeParagraphs
+        width: 80% /* Largura da linha */
+        height: 2rem /* Altura da linha */
+        background-color: #e0e0e0 /* Cor inicial */
+        border-radius: 4px
+        animation: blink 1.5s infinite ease-in-out
+        margin-top: 1rem /* Espaçamento opcional */
+
+    /* Animação de piscar */
+    @keyframes blink
+        0%
+            background-color: #e0e0e0
+        50%
+            background-color: #c0c0c0 /* Cor intermediária mais escura */
+        100% 
+            background-color: #e0e0e0
+
