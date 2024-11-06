@@ -1,4 +1,3 @@
-import './divider.sass'
 import LogoSponsor from './pieces/LogoSponsor';
 
 type ObjectSponsor = {

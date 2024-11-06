@@ -5,6 +5,5 @@ export default function LoadingBlog(){
             <div className="cardLoading"></div>
             <div className="cardLoading"></div>
         </div>
-
     )
 }

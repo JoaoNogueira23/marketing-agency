@@ -28,3 +28,26 @@ $red-light: #F62D2D
 %title-error
     font-size: 42px
     color: $red-light
+
+%link
+    ul
+        display: flex
+        flex-direction: row
+        gap: 32px
+        padding: 16px
+        list-style-type: none
+        color: $text-primary
+
+        li
+            text-decoration: none
+            display: flex
+            flex-direction: column
+
+            a
+                text-decoration: none
+                color: currentcolor
+                transition: .3s
+
+                &:hover
+                    color: $purple-color
+                    transform: translateY(-5px)

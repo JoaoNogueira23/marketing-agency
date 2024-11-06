@@ -1,32 +1,30 @@
-import styles from './styles.module.sass'
-
 export default function Footer() {
     return(
-        <footer className={styles.footer}>
-            <div className={styles.reservedDirectives}>
+        <footer className={'footer'}>
+            <div className={'reservedDirectives'}>
                 © | João Martins, Inc. All rights reserved.
             </div>
 
-            <div className={styles.infosUseWebsite}>
-                <li>
-                    <ul>
+            <div className={'infosUseWebsite'}>
+                <ul>
+                    <li>
                         <a>
                             Terms
                         </a>
-                    </ul>
-                    <ul>
+                    </li>
+                    <li>
                         <a>
                             Privacy
                         </a>
                         
-                    </ul>
-                    <ul>
+                    </li>
+                    <li>
                         <a>
                             Support
                         </a>
                         
-                    </ul>
-                </li>
+                    </li>
+                </ul>
             </div>
             
         </footer>

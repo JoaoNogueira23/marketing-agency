@@ -1,5 +1,5 @@
-@import "../../styles/variables"
-@import "../../styles/buttons"
+@import '../buttons'
+@import '../variables'
     
 .header
     z-index: 100
@@ -23,28 +23,7 @@
 
     .nav
         padding-right: 250px
-        ul
-            
-            display: flex
-            flex-direction: row
-            gap: 32px
-            padding: 16px
-            list-style-type: none
-            color: $text-primary
-
-            li
-                text-decoration: none
-                display: flex
-                flex-direction: column
-
-                a
-                    text-decoration: none
-                    color: currentcolor
-                    transition: .3s
-
-                    &:hover
-                        color: $purple-color
-                        transform: translateY(-5px)
+        @extend %link
                         
     .logo
         padding-left: 250px

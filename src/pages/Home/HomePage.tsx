@@ -1,4 +1,3 @@
-import './home.sass'
 import Image from 'next/image'
 import PostSection from '@/components/Posts'
 import DividerSection from '@/components/Divider/Divider'
@@ -36,8 +35,6 @@ export default function HomePage() {
                 alt='Imagem de capa'
                 />
             </div>
-
-            <DividerSection />
 
             <PostSection />
 
